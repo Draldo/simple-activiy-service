@@ -20,8 +20,6 @@ public class SecondActivity extends AppCompatActivity {
 
     public void doMagic2(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-        Intent service = new Intent(this, MyService.class);
         startActivity(intent);
-        stopService(service);
     }
 }

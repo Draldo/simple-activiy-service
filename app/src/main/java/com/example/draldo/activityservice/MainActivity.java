@@ -16,6 +16,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Log.d(TAG, "We're in the onCreate of the MainActivity");
+
+        Intent service = new Intent(this, MyService.class);
+        stopService(service);
     }
 
     public void doMagic(View view) {
