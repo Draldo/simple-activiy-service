@@ -20,12 +20,15 @@
         <service
             android:name=".MyService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
         <service
             android:name=".CounterService"
             android:enabled="true"
             android:exported="false" >
         </service>
+        <service android:name=".LocalService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

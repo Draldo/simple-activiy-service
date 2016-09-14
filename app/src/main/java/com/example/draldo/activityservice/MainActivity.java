@@ -11,25 +11,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.draldo.activityservice.LocalService.LocalBinder;
+
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "TAG_" ;
-    BoundService mService;
+    private static final String TAG = "TAG_";
+    LocalService mService;
     boolean mBound = false;
-
-    private ServiceConnection mConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            BoundService.LocalBinder binder = (BoundService.LocalBinder) service;
-            mService = binder.getService();
-            mBound=true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            mBound = false;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,24 +26,24 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(TAG, "We're in the onCreate of the MainActivity");
 
-        Intent service = new Intent(this, MyService.class);
-        stopService(service);
+//        Intent service = new Intent(this, MyService.class);
+//        stopService(service);
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent(this, BoundService.class);
+        Intent intent = new Intent(this, LocalService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if(mBound){
+        if (mBound) {
             unbindService(mConnection);
-            mBound=false;
+            mBound = false;
         }
     }
 
@@ -73,9 +61,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doMagic3(View view) {
-        if(mBound){
+        if (mBound) {
             int num = mService.getRandomNumber();
             Toast.makeText(this, "number: " + num, Toast.LENGTH_SHORT).show();
         }
     }
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            LocalBinder binder = (LocalBinder) service;
+            mService = binder.getService();
+            mBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mBound = false;
+        }
+    };
 }

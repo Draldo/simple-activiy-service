@@ -4,7 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.util.Random;
@@ -12,16 +11,16 @@ import java.util.Random;
 /**
  * Created by Draldo on 14/09/2016.
  */
-public class BoundService extends Service {
+public class LocalService extends Service {
 
-    private static final String TAG = BoundService.class.getSimpleName() + "TAG_";
+    private static final String TAG = LocalService.class.getSimpleName() + "TAG_";
     private final IBinder mBinder = new LocalBinder();
     private final Random mGenertor = new Random();
 
     public class LocalBinder extends Binder{
-        BoundService getService(){
+        LocalService getService(){
             Log.d(TAG, "getService: ");
-            return BoundService.this;
+            return LocalService.this;
         }
     }
 
