@@ -16,7 +16,20 @@
         android:text="Main Activity" />
 
     <Button
+        android:text="Start Service"
         android:onClick="doMagic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:onClick="doMagic2"
+        android:text="Intent Service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:onClick="doMagic3"
+        android:text="Bind Service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
